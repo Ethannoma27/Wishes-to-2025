@@ -1,3 +1,4 @@
+/* 页面基本样式 */
 * {
   margin: 0;
   padding: 0;
@@ -5,65 +6,51 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  background: linear-gradient(45deg, #FFB6C1, #FFD700);
-  height: 100vh;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, rgba(255, 153, 51, 1) 0%, rgba(255, 255, 255, 0.6) 100%);
+  color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
   overflow: hidden;
-  color: #333;
 }
 
 .container {
   text-align: center;
+  z-index: 10;
   position: relative;
-  max-width: 800px;
 }
 
 h1 {
-  font-family: 'Fira Sans', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 500;
-  color: #fff;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  font-size: 3rem;
+  color: #FF4500; /* 烟火橙色 */
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .message p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.6;
-  color: #fff;
-  max-width: 700px;
-  margin: 20px auto;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.fireworks {
+/* 添加渐变和动画效果 */
+.title p {
+  font-size: 1.5rem;
+  color: #FF6347;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+/* 让烟花动画的画布适应屏幕 */
+canvas {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-}
-
-.firework {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  opacity: 0;
-  animation: firework-animation 1s ease-out infinite;
-}
-
-@keyframes firework-animation {
-  0% {
-    transform: scale(0) translate(0, 0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1) translate(100px, -100px);
-    opacity: 0;
-  }
+  z-index: 1;
 }
