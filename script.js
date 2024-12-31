@@ -1,66 +1,22 @@
-// Fireworks.js - Create fireworks animation
-let fireworkTimeout;
+// 烟花效果
+const fireworksContainer = document.querySelector('.fireworks');
 
-function startFireworks() {
-  const canvas = document.createElement('canvas');
-  canvas.id = 'fireworks';
-  document.getElementById('fireworks-container').appendChild(canvas);
-  const ctx = canvas.getContext('2d');
-  
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+// 创建烟花动画
+function createFirework() {
+  const firework = document.createElement('div');
+  firework.classList.add('firework');
+  const size = Math.random() * 5 + 10;  // 随机生成烟花大小
+  firework.style.width = `${size}px`;
+  firework.style.height = `${size}px`;
+  firework.style.top = `${Math.random() * 100}%`;
+  firework.style.left = `${Math.random() * 100}%`;
+  fireworksContainer.appendChild(firework);
 
-  const particles = [];
-  
-  function Firework(x, y, color) {
-    this.x = x;
-    this.y = y;
-    this.color = color;
-    this.particles = [];
-    this.createParticles();
-  }
-
-  Firework.prototype.createParticles = function() {
-    const numParticles = 100;
-    for (let i = 0; i < numParticles; i++) {
-      this.particles.push({
-        x: this.x,
-        y: this.y,
-        velocityX: Math.random() * 4 - 2,
-        velocityY: Math.random() * 4 - 2,
-        alpha: 1,
-        size: Math.random() * 3 + 2,
-        color: this.color,
-      });
-    }
-  };
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((particle, index) => {
-      particle.x += particle.velocityX;
-      particle.y += particle.velocityY;
-      particle.alpha -= 0.01;
-      
-      if (particle.alpha <= 0) particles.splice(index, 1);
-
-      ctx.beginPath();
-      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-      ctx.fillStyle = particle.color;
-      ctx.fill();
-    });
-
-    if (particles.length === 0) {
-      cancelAnimationFrame(fireworkTimeout);
-    } else {
-      fireworkTimeout = requestAnimationFrame(animate);
-    }
-  }
-
-  animate();
+  // 动画结束后移除烟花
+  setTimeout(() => {
+    firework.remove();
+  }, 1000);
 }
 
-document.getElementById('start-button').addEventListener('click', () => {
-  startFireworks();
-  document.getElementById('start-button').style.display = 'none';
-});
+// 每隔200ms创建一个烟花
+setInterval(createFirework, 200);
