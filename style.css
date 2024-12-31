@@ -1,4 +1,4 @@
-/* 页面基本样式 */
+/* 基本样式 */
 * {
   margin: 0;
   padding: 0;
@@ -7,50 +7,82 @@
 
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, rgba(255, 153, 51, 1) 0%, rgba(255, 255, 255, 0.6) 100%);
-  color: #333;
+  background-color: #000;
+  color: white;
+  overflow-x: hidden;
+  position: relative;
+  height: 100vh;
+  margin: 0;
+}
+
+/* 容器 */
+.container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.container {
   text-align: center;
-  z-index: 10;
-  position: relative;
+  height: 100%;
 }
 
-h1 {
+/* 标题 */
+header h1 {
   font-size: 3rem;
-  color: #FF4500; /* 烟火橙色 */
+  color: #FFD700;
   margin-bottom: 20px;
-  font-weight: bold;
+  animation: fadeIn 3s ease-in-out;
 }
 
+/* 主要信息 */
 .message p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  margin: 10px 0;
   line-height: 1.6;
-  color: #333;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
-/* 添加渐变和动画效果 */
-.title p {
+/* 祝福信息 */
+.blessing p {
   font-size: 1.5rem;
-  color: #FF6347;
-  font-style: italic;
-  margin-top: 10px;
+  margin-top: 30px;
+  font-weight: bold;
+  color: #FFD700;
+  animation: fadeIn 3s ease-in-out 1s;
 }
 
-/* 让烟花动画的画布适应屏幕 */
-canvas {
+/* 按钮 */
+footer button {
+  background-color: #FFD700;
+  color: #000;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 30px;
+  transition: background-color 0.3s;
+}
+
+footer button:hover {
+  background-color: #FFA500;
+}
+
+/* 页面渐现动画 */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* 烟花 Canvas */
+#fireworksCanvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  pointer-events: none; /* 确保画布不会影响用户交互 */
+  z-index: 10; /* 确保烟花在内容上方 */
 }
